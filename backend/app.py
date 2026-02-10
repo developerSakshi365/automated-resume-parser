@@ -19,7 +19,13 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload_resume():
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
     file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"error": "Empty file"}), 400
+
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filepath)
 
@@ -31,7 +37,11 @@ def upload_resume():
     db.add(resume)
     db.commit()
 
-    return jsonify(data)
+    return jsonify({
+        "message": "Resume uploaded successfully",
+        "data": data
+    })
+
 
 @app.route("/resumes", methods=["GET"])
 def get_resumes():
