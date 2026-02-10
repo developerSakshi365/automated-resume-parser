@@ -1,15 +1,20 @@
-import { useState } from "react";   // ✅ import useState
-import axios from "axios";  
-import "./style.css";               // ✅ import axios
+import { useState } from "react";
+import API from "./api";     // ✅ USE API FILE
+import "./style.css";
 
 function UploadResume({ setRefresh }) {
   const [file, setFile] = useState(null);
 
   const upload = async () => {
+    if (!file) {
+      alert("Please select a file");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
 
-    await axios.post("http://localhost:5000/upload", formData);
+    await API.post("/upload", formData);  // ✅ FIXED
     alert("Resume Uploaded!");
     setRefresh(prev => !prev);
   };
@@ -22,6 +27,5 @@ function UploadResume({ setRefresh }) {
     </div>
   );
 }
-
 
 export default UploadResume;

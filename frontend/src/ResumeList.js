@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "./api";        // ✅ USE API FILE
 import "./style.css";
 
 function ResumeList({ refresh }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/resumes")
-      .then(res => setData(res.data));
+    API.get("/resumes")
+      .then(res => setData(res.data))
+      .catch(err => console.error(err));
   }, [refresh]);
 
   return (
@@ -16,36 +17,35 @@ function ResumeList({ refresh }) {
 
       <table>
         <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Skills</th>
-    <th>Education</th> {/* NEW */}
-  </tr>
-</thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Skills</th>
+            <th>Education</th>
+          </tr>
+        </thead>
 
-       <tbody>
-  {data.map((r, i) => (
-    <tr key={i}>
-      <td>{r.name}</td>
-      <td>{r.email}</td>
-      <td>{r.phone}</td>
-      <td>
-        {r.skills.split(",").map(skill => (
-          <span className="skill-tag">{skill}</span>
-        ))}
-      </td>
-<td>
-  <span className="edu-tag">{r.education}</span>
-</td>    </tr>
-  ))}
-</tbody>
+        <tbody>
+          {data.map((r, i) => (
+            <tr key={i}>
+              <td>{r.name}</td>
+              <td>{r.email}</td>
+              <td>{r.phone}</td>
+              <td>
+                {r.skills?.split(",").map((skill, idx) => (
+                  <span key={idx} className="skill-tag">{skill}</span>
+                ))}
+              </td>
+              <td>
+                <span className="edu-tag">{r.education}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
 }
 
-
 export default ResumeList;
-
