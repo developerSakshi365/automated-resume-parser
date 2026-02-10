@@ -13,6 +13,10 @@ CORS(app)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"status": "Backend is running"})
+
 @app.route("/upload", methods=["POST"])
 def upload_resume():
     file = request.files["file"]
