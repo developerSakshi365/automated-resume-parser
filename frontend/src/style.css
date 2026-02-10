@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #080c14;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(56, 189, 248, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(99, 102, 241, 0.1), transparent);
+  color: white;
+  padding: 48px 32px;
+  min-height: 100vh;
+}
+
+/* ===== APP CONTAINER ===== */
+.app-container {
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* ===== HEADER ===== */
+h2 {
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: #f0f9ff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(180deg, #38bdf8, #6366f1);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* ===== UPLOAD CARD ===== */
+.upload-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+
+.upload-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.4), rgba(99,102,241,0.4), transparent);
+}
+
+.upload-card:hover {
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.upload-card input[type="file"] {
+  background: rgba(2, 6, 23, 0.7);
+  border: 1.5px dashed rgba(56, 189, 248, 0.25);
+  padding: 14px 16px;
+  color: #94a3b8;
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.upload-card input[type="file"]:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(56, 189, 248, 0.04);
+}
+
+.upload-card input[type="file"]::file-selector-button {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: background 0.2s;
+}
+
+.upload-card input[type="file"]::file-selector-button:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+/* Upload Button */
+.upload-card button {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  border: none;
+  padding: 11px 26px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.2);
+}
+
+.upload-card button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+
+.upload-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.35);
+}
+
+.upload-card button:hover::after {
+  background: rgba(255,255,255,0.08);
+}
+
+.upload-card button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(56, 189, 248, 0.2);
+}
+
+/* ===== TABLE CARD ===== */
+.table-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.05) inset,
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow-x: auto;
+}
+
+.table-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.4), rgba(56,189,248,0.4), transparent);
+  pointer-events: none;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+  min-width: 900px;
+}
+
+/* ===== COLUMN WIDTHS ===== */
+table th:nth-child(1),
+table td:nth-child(1) { width: 16%; }   /* Name      */
+
+table th:nth-child(2),
+table td:nth-child(2) { width: 19%; }   /* Email     */
+
+table th:nth-child(3),
+table td:nth-child(3) { width: 13%; }   /* Phone     */
+
+table th:nth-child(4),
+table td:nth-child(4) { width: 20%; }   /* Skills    */
+
+table th:nth-child(5),
+table td:nth-child(5) { width: 32%; }   /* Education */
+
+/* ===== THEAD ===== */
+thead {
+  background: rgba(2, 6, 23, 0.7);
+}
+
+thead tr th:first-child { border-radius: 10px 0 0 10px; }
+thead tr th:last-child  { border-radius: 0 10px 10px 0; }
+
+th {
+  padding: 14px 16px;
+  text-align: left;
+  color: #38bdf8;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== TBODY ===== */
+td {
+  padding: 15px 16px;
+  text-align: left;
+  vertical-align: middle;
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* ← single line height for ALL cells */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+tbody tr {
+  transition: background 0.18s, box-shadow 0.18s;
+}
+
+tbody tr:hover {
+  background: rgba(56, 189, 248, 0.07);
+  box-shadow: inset 3px 0 0 #38bdf8;
+}
+
+tbody tr:hover td {
+  color: #f0f9ff;
+}
+
+/* ===== NAME COLUMN ===== */
+td:nth-child(1) {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #f1f5f9;
+}
+
+/* ===== EMAIL COLUMN ===== */
+td:nth-child(2) {
+  color: #94a3b8;
+  font-size: 0.83rem;
+}
+
+/* ===== PHONE COLUMN ===== */
+td:nth-child(3) {
+  color: #7dd3fc;
+  font-size: 0.83rem;
+  letter-spacing: 0.03em;
+}
+
+/* ===== SKILLS COLUMN ===== */
+td:nth-child(4) {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ===== SKILLS TAG ===== */
+.skill-tag {
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: inline-block;
+  margin: 2px 3px 2px 0;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.skill-tag:hover {
+  background: rgba(14, 165, 233, 0.22);
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+/* ===== EDUCATION CELL ===== */
+td:nth-child(5) {
+  position: relative;        /* ← anchor for the floating popup */
+  overflow: visible;         /* ← allow popup to escape cell */
+  white-space: nowrap;
+  padding: 0 16px;
+}
+
+/* ===== EDUCATION TAG — collapsed (single line) ===== */
+.edu-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: default;
+
+  /* ← SINGLE LINE — truncate long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.edu-tag::before {
+  content: '🎓';
+  font-size: 0.82rem;
+  flex-shrink: 0;            /* icon never disappears */
+}
+
+/* ===== EDUCATION TAG — expanded on hover ===== */
+td:nth-child(5):hover .edu-tag {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  right: 12px;
+  z-index: 100;
+
+  /* ← MULTI LINE when hovered */
+  white-space: normal;
+  word-break: break-word;
+  overflow: visible;
+  text-overflow: unset;
+
+  background: #1a2035;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(99, 102, 241, 0.3);
+  color: #c7d2fe;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
