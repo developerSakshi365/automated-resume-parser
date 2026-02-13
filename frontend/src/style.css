@@ -14,7 +14,8 @@ body {
     radial-gradient(ellipse 80% 50% at 20% -10%, rgba(56, 189, 248, 0.12), transparent),
     radial-gradient(ellipse 60% 40% at 80% 110%, rgba(99, 102, 241, 0.1), transparent);
   color: white;
-  padding: 48px 32px;
+  /* Responsive padding: tighter on mobile */
+  padding: 24px 16px;
   min-height: 100vh;
 }
 
@@ -22,13 +23,14 @@ body {
 .app-container {
   max-width: 1300px;
   margin: auto;
+  width: 100%;
 }
 
 /* ===== HEADER ===== */
 h2 {
   margin-bottom: 18px;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   letter-spacing: -0.01em;
   color: #f0f9ff;
   display: flex;
@@ -51,11 +53,11 @@ h2::before {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 28px 28px 24px;
+  padding: 20px 16px 18px;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.06) inset,
     0 20px 60px rgba(0, 0, 0, 0.5);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   position: relative;
   overflow: hidden;
   transition: border-color 0.25s;
@@ -76,12 +78,12 @@ h2::before {
 .upload-card input[type="file"] {
   background: rgba(2, 6, 23, 0.7);
   border: 1.5px dashed rgba(56, 189, 248, 0.25);
-  padding: 14px 16px;
+  padding: 12px 14px;
   color: #94a3b8;
   border-radius: 12px;
   width: 100%;
-  margin-bottom: 16px;
-  font-size: 0.88rem;
+  margin-bottom: 14px;
+  font-size: 0.82rem;
   transition: border-color 0.2s, background 0.2s;
   cursor: pointer;
 }
@@ -95,13 +97,13 @@ h2::before {
   background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.3);
   color: #38bdf8;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 7px;
   font-family: "Poppins", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  margin-right: 12px;
+  margin-right: 10px;
   transition: background 0.2s;
 }
 
@@ -124,6 +126,8 @@ h2::before {
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 18px rgba(56, 189, 248, 0.2);
+  /* Full width on small screens */
+  width: 100%;
 }
 
 .upload-card button::after {
@@ -153,12 +157,15 @@ h2::before {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 20px;
-  padding: 28px;
+  /* No padding on sides so scroll track sits at the card edge */
+  padding: 24px 0;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.05) inset,
     0 20px 60px rgba(0, 0, 0, 0.5);
   position: relative;
+  /* Horizontal scroll lives here */
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table-card::after {
@@ -170,13 +177,42 @@ h2::before {
   pointer-events: none;
 }
 
+/* Custom scrollbar for table card */
+.table-card::-webkit-scrollbar {
+  height: 6px;
+}
+.table-card::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+  border-radius: 0 0 20px 20px;
+}
+.table-card::-webkit-scrollbar-thumb {
+  background: rgba(56,189,248,0.25);
+  border-radius: 10px;
+}
+.table-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(56,189,248,0.45);
+}
+
 /* ===== TABLE ===== */
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
   table-layout: fixed;
-  min-width: 900px;
+  /* Ensures table is at least wide enough to be usable on mobile */
+  min-width: 700px;
+  /* Horizontal padding inside the card, not on the card itself */
+  padding: 0 20px;
+}
+
+/* Add left/right padding via a wrapper trick using th/td on edges */
+table th:first-child,
+table td:first-child {
+  padding-left: 20px;
+}
+table th:last-child,
+table td:last-child {
+  padding-right: 20px;
 }
 
 /* ===== COLUMN WIDTHS ===== */
@@ -220,7 +256,6 @@ td {
   vertical-align: middle;
   color: #cbd5e1;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  /* ← single line height for ALL cells */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -295,8 +330,8 @@ td:nth-child(4) {
 
 /* ===== EDUCATION CELL ===== */
 td:nth-child(5) {
-  position: relative;        /* ← anchor for the floating popup */
-  overflow: visible;         /* ← allow popup to escape cell */
+  position: relative;
+  overflow: visible;
   white-space: nowrap;
   padding: 0 16px;
 }
@@ -314,20 +349,17 @@ td:nth-child(5) {
   font-size: 0.78rem;
   font-weight: 500;
   cursor: default;
-
-  /* ← SINGLE LINE — truncate long text */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-
   transition: background 0.2s, border-color 0.2s;
 }
 
 .edu-tag::before {
   content: '🎓';
   font-size: 0.82rem;
-  flex-shrink: 0;            /* icon never disappears */
+  flex-shrink: 0;
 }
 
 /* ===== EDUCATION TAG — expanded on hover ===== */
@@ -337,13 +369,10 @@ td:nth-child(5):hover .edu-tag {
   left: 12px;
   right: 12px;
   z-index: 100;
-
-  /* ← MULTI LINE when hovered */
   white-space: normal;
   word-break: break-word;
   overflow: visible;
   text-overflow: unset;
-
   background: #1a2035;
   border-color: rgba(99, 102, 241, 0.6);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
@@ -351,4 +380,196 @@ td:nth-child(5):hover .edu-tag {
   color: #c7d2fe;
   border-radius: 12px;
   padding: 12px 14px;
+}
+
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* --- Tablet (≤ 1024px) --- */
+@media (max-width: 1024px) {
+  body {
+    padding: 32px 20px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  th {
+    font-size: 0.68rem;
+    padding: 12px 12px;
+  }
+
+  td {
+    padding: 13px 12px;
+    font-size: 0.82rem;
+  }
+
+  td:nth-child(1) {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* --- Mobile (≤ 768px) --- */
+@media (max-width: 768px) {
+  body {
+    /* Remove the wide side padding that caused the "margin" issue */
+    padding: 16px 12px;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  /* Upload card: tight padding on mobile */
+  .upload-card {
+    padding: 16px 14px 14px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .upload-card input[type="file"] {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    margin-bottom: 12px;
+  }
+
+  .upload-card input[type="file"]::file-selector-button {
+    padding: 5px 10px;
+    font-size: 0.74rem;
+    margin-right: 8px;
+  }
+
+  .upload-card button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  /* Table card: remove side padding so scroll track is flush */
+  .table-card {
+    border-radius: 16px;
+    padding: 18px 0;
+  }
+
+  /* Reduce minimum width — still enough to be readable */
+  table {
+    min-width: 580px;
+    font-size: 12.5px;
+  }
+
+  table th:first-child,
+  table td:first-child {
+    padding-left: 14px;
+  }
+  table th:last-child,
+  table td:last-child {
+    padding-right: 14px;
+  }
+
+  th {
+    padding: 11px 10px;
+    font-size: 0.64rem;
+    letter-spacing: 0.07em;
+  }
+
+  td {
+    padding: 12px 10px;
+    font-size: 0.78rem;
+  }
+
+  td:nth-child(1) {
+    font-size: 0.82rem;
+  }
+
+  td:nth-child(2),
+  td:nth-child(3) {
+    font-size: 0.75rem;
+  }
+
+  .skill-tag {
+    font-size: 0.64rem;
+    padding: 2px 8px;
+  }
+
+  .edu-tag {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+  }
+}
+
+
+/* --- Small mobile (≤ 480px) --- */
+@media (max-width: 480px) {
+  body {
+    padding: 12px 10px;
+  }
+
+  h2 {
+    font-size: 0.95rem;
+  }
+
+  .upload-card {
+    padding: 14px 12px 12px;
+    border-radius: 14px;
+  }
+
+  .table-card {
+    border-radius: 14px;
+  }
+
+  table {
+    /* On very small phones, keep a reasonable min-width and let it scroll */
+    min-width: 520px;
+    font-size: 12px;
+  }
+
+  th {
+    padding: 10px 9px;
+    font-size: 0.6rem;
+  }
+
+  td {
+    padding: 11px 9px;
+    font-size: 0.75rem;
+  }
+
+  .skill-tag {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+  }
+
+  .edu-tag {
+    font-size: 0.68rem;
+    padding: 4px 9px;
+  }
+}
+
+
+/* --- Large desktop (≥ 1280px) — restore original generous spacing --- */
+@media (min-width: 1280px) {
+  body {
+    padding: 48px 32px;
+  }
+
+  .upload-card {
+    padding: 28px 28px 24px;
+  }
+
+  .table-card {
+    padding: 28px 0;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .upload-card button {
+    width: auto;
+  }
 }
