@@ -45,7 +45,7 @@ function ResumeList({ refresh }) {
         </tbody>
       </table>
     </div>
-  );
+  ); 
 }
 
 export default ResumeList;
