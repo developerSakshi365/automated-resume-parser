@@ -9,8 +9,6 @@ This project demonstrates real-world implementation of **Python NLP, Flask backe
 ## 🚀 Live Demo
  link - https://automated-resume-parser.vercel.app/
 
-*(Replace with your deployed URLs)*
-
 ---
 
 ## 🧠 Features
@@ -66,7 +64,7 @@ This project demonstrates real-world implementation of **Python NLP, Flask backe
 
 
 ### 🏗️ Project Structure
-
+```bash
 Automated-Resume-Parser/
 │
 ├── frontend/ # React frontend
@@ -82,12 +80,12 @@ Automated-Resume-Parser/
 │
 └── README.md
 
-
+```
 ---
 
 ## 🧪 Installation & Running Locally
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/Automated-Resume-Parser.git
