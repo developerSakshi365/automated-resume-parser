@@ -32,10 +32,14 @@ def upload_resume():
     text = extract_text(filepath)
     data = parse_resume(text)
 
+    # DELETE FILE AFTER PARSING
+    os.remove(filepath)
+
     db = SessionLocal()
     resume = Resume(**data)
     db.add(resume)
     db.commit()
+    db.close()
 
     return jsonify({
         "message": "Resume uploaded successfully",
